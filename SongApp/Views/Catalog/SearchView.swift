@@ -23,7 +23,7 @@ struct SearchView: View {
                     .cornerRadius(9)
                 // Вывод надписи при пустом неативном поле
                 if !FieldIsFocused && search == ""{
-                    Text("Search").foregroundColor(.black)
+                    Text("Поиск").foregroundColor(.black)
                 }
                 HStack {
                     if search == "" {

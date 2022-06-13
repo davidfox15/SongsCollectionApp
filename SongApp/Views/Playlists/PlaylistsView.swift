@@ -14,40 +14,24 @@ struct PlaylistsView: View {
     @FetchRequest(fetchRequest: Playlist.getAll()) var playlists : FetchedResults<Playlist>
     
     @State var playlistName : String = ""
+    @FocusState private var FieldIsFocused: Bool
     
     var body: some View {
         NavigationView {
-            VStack{
-                // Плейлисты
-                List(playlists, id: \.self.id) { item in
-                    NavigationLink(destination: SongsListView(playlist: item)) {
-                        // Строка с песней
-                        PlaylistLineView(playlistname: item.unwrapName, playlistsongs: item.unwrapSongs.count)
-                    }
-                    .swipeActions {
-                        Button(role: .destructive) {
-                            print("delete")
-                            viewContext.delete(item)
-                        } label: {
-                            Label("Delete", systemImage: "trash")
-                        }
-                        .tint(.red)
-                    }
-                }
-                .navigationBarTitle("Плейлисты")
-                .listStyle(.inset)
-                
-                
-                //Строка для добавления плейлистов
-                Text("Create Playlist")
+            VStack{  //Строка для добавления плейлистов
+                //Text("Create Playlist")
                 ZStack {
                     Rectangle()
                         .foregroundColor(/*@START_MENU_TOKEN@*/Color(red: 0.8941176470588236, green: 0.9137254901960784, blue: 0.9529411764705882)/*@END_MENU_TOKEN@*/)
                         .cornerRadius(9)
+                    if !FieldIsFocused && playlistName == ""{
+                        Text("Добавить плейлист").foregroundColor(.black)
+                    }
                     HStack {
                         TextField("",text: $playlistName)
                             .foregroundColor(.black)
                             .keyboardType(.webSearch)
+                            .focused($FieldIsFocused)
                             .onSubmit {
                                 if(playlistName != ""){
                                     if(Playlist.createPlaylist(name: playlistName, context: viewContext)) {
@@ -72,7 +56,24 @@ struct PlaylistsView: View {
                 }
                 .frame(height: 38)
                 .padding()
-                
+                // Плейлисты
+                List(playlists, id: \.self.id) { item in
+                    NavigationLink(destination: SongsListView(playlist: item)) {
+                        // Строка с песней
+                        PlaylistLineView(playlistname: item.unwrapName, playlistsongs: item.unwrapSongs.count)
+                    }
+                    .swipeActions {
+                        Button(role: .destructive) {
+                            print("delete")
+                            viewContext.delete(item)
+                        } label: {
+                            Label("Delete", systemImage: "trash")
+                        }
+                        .tint(.red)
+                    }
+                }
+                .navigationBarTitle("Плейлисты")
+                .listStyle(.inset)
                 
                 //Меню
                 NavigationBarView(page: $page)
