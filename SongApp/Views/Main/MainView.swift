@@ -19,8 +19,8 @@ struct MainView: View {
             //NewsView(page: $page)
         case 2:
             CatalogView(page: $page, songsViewModel: songsViewModelFromServer, filter: filter)
-        //case 3:
-            //PlayListsView(page: $page)
+        case 3:
+            PlaylistsView(page: $page)
         default:
             Text("Page does not exist")
         }

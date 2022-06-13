@@ -38,7 +38,8 @@ public class Playlist: NSManagedObject {
         do {
             array = try context.fetch(request)
             for item in array {
-                if(item.unwrapName != "Favorite") {
+                //print("id:\(item.id) name:\(item.unwrapName)")
+                if(item.unwrapName == "Favorite") {
                     return item
                 }
             }

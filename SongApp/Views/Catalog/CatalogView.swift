@@ -30,7 +30,7 @@ struct CatalogView: View {
                     Text("could not connect to the server")
                 }
                 // Список песен
-                //NavigationLink(destination: SongsListView(), label: {Text("Favorite")})
+                NavigationLink(destination: SongsListView(playlist: Playlist.getFavoriteList(context: viewContext)), label: {Text("Favorite")})
 
                 Button(action: {
 //                    for song in songs {
@@ -44,23 +44,20 @@ struct CatalogView: View {
                 
                 List(songsViewModel.songs, id: \.self.id) { song in
                     // Переход на страницу с песней
-                   // NavigationLink(destination: SongView(song: song)) {
+                    NavigationLink(destination: SongView(song: song)) {
                         // Строка с песней
                         SongLineView(song:  song)
-                    //}
+                    }
                     .swipeActions {
                         Button(role: .destructive) {
                             if(song.isSaveInFavoriteList(context: viewContext)) {
                                 // delete from favorite
                             } else {
                                 // add to favorite
+                                song.saveToFavorite(context: viewContext)
+                                // для обновления звездочки
+                                songsViewModel.getAll(sortby: filter.sort, inverse: filter.inverse)
                             }
-//                            if(song.isSave(songs: songs)){
-//                                if viewContext.hasChanges {
-//                                    print("try to save")
-//                                    try? viewContext.save()
-//                                }
-//                            }
                         } label: {
                             Label("Favorite", systemImage: "star")
                         }
@@ -89,15 +86,6 @@ struct CatalogView: View {
         }
         .accentColor(/*@START_MENU_TOKEN@*/Color(red: 0.18823529411764706, green: 0.26666666666666666, blue: 0.3058823529411765)/*@END_MENU_TOKEN@*/)
     }
-    
-//    func favoritePlaylist() -> Playlist {
-//        let playlist = Playlist(context: viewContext)
-//        playlist.name = "Favorite"
-//        for song in songs {
-//            playlist.addToSongs(song)
-//        }
-//        return playlist
-//    }
 }
 
 struct CatalogView_Previews: PreviewProvider {

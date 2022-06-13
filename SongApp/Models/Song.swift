@@ -58,6 +58,17 @@ class Song: Codable, SP {
         }
         return false
     }
+    
+    func saveToFavorite(context: NSManagedObjectContext) {
+        // Проверка на наличие песни в избранном
+        if(!self.isSaveInFavoriteList(context: context)) {
+            let favorite = Playlist.getFavoriteList(context: context)
+            favorite.addToSongs(self.converToSong(context: context))
+            if(context.hasChanges) {
+                try? context.save()
+            }
+        }
+    }
 //    public func isSave(songs: FetchedResults<CDSong>)-> Bool {
 //        for song in songs {
 //            if(song.id == self.id) {
