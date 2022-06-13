@@ -18,8 +18,9 @@ struct CatalogView: View {
     // Фильтр
     @ObservedObject var filter : Filter
     
-    
     @State var showSheet : Bool = false
+    
+    @State private var chosesong : Song? = nil
     
     var body: some View {
         NavigationView {
@@ -29,19 +30,11 @@ struct CatalogView: View {
                 if(songsViewModel.connect == false){
                     Text("could not connect to the server")
                 }
-                // Список песен
-                NavigationLink(destination: SongsListView(playlist: Playlist.getFavoriteList(context: viewContext)), label: {Text("Favorite")})
-
-                Button(action: {
-//                    for song in songs {
-//                        viewContext.delete(song)
-//                    }
-//                    if viewContext.hasChanges {
-//                        print("delted")
-//                        try? viewContext.save()
-//                    }
-                }, label: {Text("DELETE")})
                 
+                // Костыль для работы sheet с первого рза (ОРУ) != nil
+                if chosesong != nil {}
+                
+                // Список песен
                 List(songsViewModel.songs, id: \.self.id) { song in
                     // Переход на страницу с песней
                     NavigationLink(destination: SongView(song: song)) {
@@ -63,16 +56,13 @@ struct CatalogView: View {
                         }
                         .tint(.yellow)
                         Button(role: .destructive) {
-                            print("add to playlist")
+                            self.chosesong = Song(song)
                             showSheet.toggle()
                         } label: {
                             Label("Playlist", systemImage: "plus.circle")
                         }
                         .tint(.blue)
                     }
-                    //                    .sheet(isPresented: $showSheet) {
-                    //                        ChosePlaylistSheet(song: song)
-                    //                    }
                 }
                 .listStyle(.plain)
                 .navigationBarHidden(true)
@@ -80,6 +70,15 @@ struct CatalogView: View {
                     songsViewModel.getAll(sortby: filter.sort, inverse: filter.inverse)
                 }
                 NavigationBarView(page: $page)
+            }
+            .sheet(isPresented: $showSheet, onDismiss: {
+                songsViewModel.getAll(sortby: filter.sort, inverse: filter.inverse)
+            }) {
+                if let chosesong = self.chosesong {
+                    ChosePlaylistSheet(song: chosesong)
+                } else {
+                    Text("chosesong is nil")
+                }
             }
             .frame(maxHeight: .infinity ,alignment: .bottom)
             .ignoresSafeArea(.container, edges: .bottom)

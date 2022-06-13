@@ -14,6 +14,10 @@ protocol SP {
     func gettext() -> String
     func getviews() -> Int32
     func getid() -> Int32
+    
     func isSaveInFavoriteList(context: NSManagedObjectContext) -> Bool
     func saveToFavorite(context: NSManagedObjectContext)
+    
+    func isSaveInList(name: String, context: NSManagedObjectContext) -> Bool
+    func saveToList(name: String, context: NSManagedObjectContext)
 }

@@ -81,4 +81,28 @@ public class CDSong: NSManagedObject, SP {
             }
         }
     }
+    
+    func isSaveInList(name: String, context: NSManagedObjectContext) -> Bool {
+        // Ищет избранное елси оно уже созданно, создает если его нет
+        if let list = Playlist.getList(name: name, context: context ) {
+            // Ищет в избранном песню
+            for song in list.unwrapSongs {
+                if(self.id == song.id) {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+    
+    func saveToList(name: String, context: NSManagedObjectContext) {
+        if(!self.isSaveInList(name: name, context: context)) {
+            if let list = Playlist.getList(name: name, context: context) {
+                list.addToSongs(self)
+                if(context.hasChanges) {
+                    try? context.save()
+                }
+            }
+        }
+    }
 }

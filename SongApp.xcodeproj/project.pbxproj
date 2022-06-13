@@ -29,6 +29,7 @@
 		6350A0E928561A65003E3F93 /* SP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6350A0E828561A65003E3F93 /* SP.swift */; };
 		6350A0EC285761D7003E3F93 /* PlaylistsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6350A0EB285761D7003E3F93 /* PlaylistsView.swift */; };
 		6350A0EE2857621E003E3F93 /* PlaylistLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6350A0ED2857621E003E3F93 /* PlaylistLineView.swift */; };
+		6350A0F12857741E003E3F93 /* ChosePlaylistSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6350A0F02857741E003E3F93 /* ChosePlaylistSheet.swift */; };
 		6394FD7A285492BC002E62E2 /* Playlist+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6394FD76285492BC002E62E2 /* Playlist+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +57,7 @@
 		6350A0E828561A65003E3F93 /* SP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SP.swift; sourceTree = "<group>"; };
 		6350A0EB285761D7003E3F93 /* PlaylistsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistsView.swift; sourceTree = "<group>"; };
 		6350A0ED2857621E003E3F93 /* PlaylistLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistLineView.swift; sourceTree = "<group>"; };
+		6350A0F02857741E003E3F93 /* ChosePlaylistSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChosePlaylistSheet.swift; sourceTree = "<group>"; };
 		6394FD76285492BC002E62E2 /* Playlist+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Playlist+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -175,6 +177,7 @@
 				632D622C28500A510003C6ED /* SearchView.swift */,
 				632D622928500A150003C6ED /* CatalogView.swift */,
 				632D623028500B0F0003C6ED /* SongLineView.swift */,
+				6350A0F02857741E003E3F93 /* ChosePlaylistSheet.swift */,
 			);
 			path = Catalog;
 			sourceTree = "<group>";
@@ -278,6 +281,7 @@
 				632D62192850035A0003C6ED /* Playlist+CoreDataClass.swift in Sources */,
 				632D622F28500A9A0003C6ED /* NavigationBarView.swift in Sources */,
 				6350A0E928561A65003E3F93 /* SP.swift in Sources */,
+				6350A0F12857741E003E3F93 /* ChosePlaylistSheet.swift in Sources */,
 				6350A0E72856147D003E3F93 /* CDSong+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

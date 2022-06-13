@@ -52,6 +52,44 @@ public class Playlist: NSManagedObject {
         favoriteList.name = "Favorite"
         return favoriteList
     }
+    
+    static func getList(name: String, context: NSManagedObjectContext) -> Playlist? {
+        // Поиск в контексте избранного
+        let request = Playlist.getAll()
+        let array : [Playlist]
+        do {
+            array = try context.fetch(request)
+            for item in array {
+                //print("id:\(item.id) name:\(item.unwrapName)")
+                if(item.unwrapName == name) {
+                    return item
+                }
+            }
+        } catch(let error) {
+            print("isSave fetcherror -\(error)")
+        }
+        return nil
+    }
+    
+    static func createPlaylist(name : String, context: NSManagedObjectContext) -> Bool {
+        // Поиск    плейлистас ам именем
+        let request = Playlist.getAll()
+        let array : [Playlist]
+        do {
+            array = try context.fetch(request)
+            for item in array {
+                if(item.unwrapName == name) {
+                    return false
+                }
+            }
+        } catch(let error) {
+            print("isSave fetcherror -\(error)")
+        }
+        // Создание нового плейлиста
+        let newplaylist = Playlist(context: context)
+        newplaylist.name = name
+        return true
+    }
 }
 
 extension NSSet {

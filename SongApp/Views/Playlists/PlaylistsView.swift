@@ -17,7 +17,7 @@ struct PlaylistsView: View {
     
     var body: some View {
         NavigationView {
-            VStack{                
+            VStack{
                 // Плейлисты
                 List(playlists, id: \.self.id) { item in
                     NavigationLink(destination: SongsListView(playlist: item)) {
@@ -34,7 +34,7 @@ struct PlaylistsView: View {
                         .tint(.red)
                     }
                 }
-                .navigationBarTitle("Playlists")
+                .navigationBarTitle("Плейлисты")
                 .listStyle(.inset)
                 
                 
@@ -50,15 +50,19 @@ struct PlaylistsView: View {
                             .keyboardType(.webSearch)
                             .onSubmit {
                                 if(playlistName != ""){
-                                    //CoreDataService.createPlaylist(songsFromDB: playlists, viewContext: viewContext , name: playlistName)
-                                    
+                                    if(Playlist.createPlaylist(name: playlistName, context: viewContext)) {
+                                        try? viewContext.save()
+                                    }
+                                    print("Already have this name playlist")
                                 } else {
                                     print("Not create empty name playlist")
                                 }
                             }
                         Button(action: {
                             if(playlistName != ""){
-                                //CoreDataService.createPlaylist(songsFromDB: playlists, viewContext: viewContext , name: playlistName)
+                                if(Playlist.createPlaylist(name: playlistName, context: viewContext)) {
+                                    try? viewContext.save()
+                                }
                             } else {
                                 print("Not create empty name playlist")
                             }
