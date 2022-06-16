@@ -66,6 +66,9 @@ struct PlaylistsView: View {
                         Button(role: .destructive) {
                             print("delete")
                             viewContext.delete(item)
+                            if(viewContext.hasChanges) {
+                                try? viewContext.save()
+                            }
                         } label: {
                             Label("Delete", systemImage: "trash")
                         }

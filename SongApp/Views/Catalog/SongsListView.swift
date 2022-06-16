@@ -18,7 +18,7 @@ struct SongsListView: View {
             // Список песен
             List(playlist.unwrapSongs, id: \.self.id) { song in
                 // Переход на страницу с песней
-                NavigationLink(destination: SongView(song: song)) {
+                NavigationLink(destination: SongView(song: song,text: song.gettext())) {
                     // Строка с песней
                     SongLineView(song: song)
                 }
@@ -26,15 +26,18 @@ struct SongsListView: View {
                     Button(role: .destructive) {
                         print("delete")
                         viewContext.delete(song)
+                        if(viewContext.hasChanges) {
+                            try? viewContext.save()
+                        }
                     } label: {
-                        Label("Delete", systemImage: "trash")
+                        Label("", systemImage: "trash")
                     }
                     .tint(.red)
                     Button(role: .destructive) {
                         print("add to playlist")
                        // showSheet.toggle()
                     } label: {
-                        Label("Playlist", systemImage: "plus.circle")
+                        Label("", systemImage: "plus.circle")
                     }
                     .tint(.blue)
                 }

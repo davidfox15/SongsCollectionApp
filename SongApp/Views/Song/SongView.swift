@@ -11,6 +11,7 @@ struct SongView: View {
     @Environment(\.managedObjectContext) private var viewContext
     
     @State var song: SP
+    @State var text : String
     @State var fontSize: Int = 17
     @State var isFavorite: Bool = false
     @State var showingAlert : Bool = false
@@ -18,11 +19,11 @@ struct SongView: View {
     var body: some View {
         VStack {
             ScrollView {
-                Text("\(song.gettext())\n\n\nПесня: \(song.getname())\nИсполнитель: \(song.getauthor())")
+                Text("\(text)\n\n\nПесня: \(song.getname())\nИсполнитель: \(song.getauthor())")
                     .font(.system(size: Double(fontSize)))
                     .padding(.horizontal, 10.0)
             }
-            //SongMenu(fontSize: $fontSize, song: $song)
+            SongBarView(fontSize: $fontSize, text: $text)
         }
         //.frame(maxHeight: .infinity ,alignment: .bottom)
         .ignoresSafeArea(.container, edges: .bottom)

@@ -20,4 +20,6 @@ protocol SP {
     
     func isSaveInList(name: String, context: NSManagedObjectContext) -> Bool
     func saveToList(name: String, context: NSManagedObjectContext)
+    
+    func setText(text: String)
 }

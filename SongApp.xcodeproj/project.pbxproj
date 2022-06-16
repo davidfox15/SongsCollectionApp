@@ -24,6 +24,8 @@
 		632D623128500B0F0003C6ED /* SongLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632D623028500B0F0003C6ED /* SongLineView.swift */; };
 		632D623328500BDC0003C6ED /* SongView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632D623228500BDC0003C6ED /* SongView.swift */; };
 		632D6235285017320003C6ED /* SongsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632D6234285017320003C6ED /* SongsListView.swift */; };
+		6331343E285AFB9C00DDE6C3 /* Tonality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6331343D285AFB9C00DDE6C3 /* Tonality.swift */; };
+		63313441285AFC1900DDE6C3 /* SongBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63313440285AFC1900DDE6C3 /* SongBarView.swift */; };
 		6350A0E62856147D003E3F93 /* CDSong+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6350A0E42856147D003E3F93 /* CDSong+CoreDataClass.swift */; };
 		6350A0E72856147D003E3F93 /* CDSong+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6350A0E52856147D003E3F93 /* CDSong+CoreDataProperties.swift */; };
 		6350A0E928561A65003E3F93 /* SP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6350A0E828561A65003E3F93 /* SP.swift */; };
@@ -52,6 +54,8 @@
 		632D623028500B0F0003C6ED /* SongLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongLineView.swift; sourceTree = "<group>"; };
 		632D623228500BDC0003C6ED /* SongView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongView.swift; sourceTree = "<group>"; };
 		632D6234285017320003C6ED /* SongsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongsListView.swift; sourceTree = "<group>"; };
+		6331343D285AFB9C00DDE6C3 /* Tonality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tonality.swift; sourceTree = "<group>"; };
+		63313440285AFC1900DDE6C3 /* SongBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongBarView.swift; sourceTree = "<group>"; };
 		6350A0E42856147D003E3F93 /* CDSong+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDSong+CoreDataClass.swift"; sourceTree = "<group>"; };
 		6350A0E52856147D003E3F93 /* CDSong+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDSong+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		6350A0E828561A65003E3F93 /* SP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SP.swift; sourceTree = "<group>"; };
@@ -125,11 +129,10 @@
 		632D6212285001AA0003C6ED /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				6331343F285AFBE000DDE6C3 /* Song */,
 				6350A0EA285761C1003E3F93 /* Playlists */,
 				6350A0E3285504E6003E3F93 /* Catalog */,
 				632D622828500A040003C6ED /* Main */,
-				632D623228500BDC0003C6ED /* SongView.swift */,
-				632D6234285017320003C6ED /* SongsListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -158,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				632D62262850097C0003C6ED /* Filter.swift */,
+				6331343D285AFB9C00DDE6C3 /* Tonality.swift */,
 			);
 			path = Logic;
 			sourceTree = "<group>";
@@ -171,9 +175,19 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
+		6331343F285AFBE000DDE6C3 /* Song */ = {
+			isa = PBXGroup;
+			children = (
+				632D623228500BDC0003C6ED /* SongView.swift */,
+				63313440285AFC1900DDE6C3 /* SongBarView.swift */,
+			);
+			path = Song;
+			sourceTree = "<group>";
+		};
 		6350A0E3285504E6003E3F93 /* Catalog */ = {
 			isa = PBXGroup;
 			children = (
+				632D6234285017320003C6ED /* SongsListView.swift */,
 				632D622C28500A510003C6ED /* SearchView.swift */,
 				632D622928500A150003C6ED /* CatalogView.swift */,
 				632D623028500B0F0003C6ED /* SongLineView.swift */,
@@ -264,6 +278,7 @@
 				632D622A28500A150003C6ED /* CatalogView.swift in Sources */,
 				632D623328500BDC0003C6ED /* SongView.swift in Sources */,
 				632D6235285017320003C6ED /* SongsListView.swift in Sources */,
+				63313441285AFC1900DDE6C3 /* SongBarView.swift in Sources */,
 				6350A0E62856147D003E3F93 /* CDSong+CoreDataClass.swift in Sources */,
 				632D62272850097C0003C6ED /* Filter.swift in Sources */,
 				632D6224285008B70003C6ED /* SongsService.swift in Sources */,
@@ -279,6 +294,7 @@
 				632D61F7285000B10003C6ED /* SongAppApp.swift in Sources */,
 				6394FD7A285492BC002E62E2 /* Playlist+CoreDataProperties.swift in Sources */,
 				632D62192850035A0003C6ED /* Playlist+CoreDataClass.swift in Sources */,
+				6331343E285AFB9C00DDE6C3 /* Tonality.swift in Sources */,
 				632D622F28500A9A0003C6ED /* NavigationBarView.swift in Sources */,
 				6350A0E928561A65003E3F93 /* SP.swift in Sources */,
 				6350A0F12857741E003E3F93 /* ChosePlaylistSheet.swift in Sources */,

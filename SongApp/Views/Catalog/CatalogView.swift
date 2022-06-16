@@ -37,7 +37,7 @@ struct CatalogView: View {
                 // Список песен
                 List(songsViewModel.songs, id: \.self.id) { song in
                     // Переход на страницу с песней
-                    NavigationLink(destination: SongView(song: song)) {
+                    NavigationLink(destination: SongView(song: song,text: song.gettext())) {
                         // Строка с песней
                         SongLineView(song:  song)
                     }
@@ -52,14 +52,16 @@ struct CatalogView: View {
                                 songsViewModel.getAll(sortby: filter.sort, inverse: filter.inverse)
                             }
                         } label: {
-                            Label("Favorite", systemImage: "star")
+                            //Favorite
+                            Label("", systemImage: "star")
                         }
                         .tint(.yellow)
                         Button(role: .destructive) {
                             self.chosesong = Song(song)
                             showSheet.toggle()
                         } label: {
-                            Label("Playlist", systemImage: "plus.circle")
+                            //Playlist
+                            Label("", systemImage: "plus.circle")
                         }
                         .tint(.blue)
                     }

@@ -105,4 +105,8 @@ public class CDSong: NSManagedObject, SP {
             }
         }
     }
+    
+    func setText(text: String) {
+        self.text = text
+    }
 }

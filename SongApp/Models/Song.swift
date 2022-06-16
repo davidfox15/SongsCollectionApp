@@ -109,6 +109,10 @@ class Song: Codable, SP {
             }
         }
     }
+    
+    func setText(text: String) {
+        self.text = text
+    }
     //    public func isSave(songs: FetchedResults<CDSong>)-> Bool {
     //        for song in songs {
     //            if(song.id == self.id) {
