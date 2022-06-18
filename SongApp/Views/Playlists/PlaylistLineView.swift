@@ -18,8 +18,14 @@ struct PlaylistLineView: View {
                 .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
             VStack(alignment: .leading) {
                 HStack(alignment: .bottom){
+                    if(playlistname == "Favorite"){
+                        Text("Избранное")
+                            .font(.system(size: 30, weight: .bold))
+                    }else{
                     Text("\(playlistname)")
-                        .font(.system(size: 30, weight: .bold))
+                            .font(.system(size: 30, weight: .bold))
+                    }
+                        
                     Text("Кол-во песен: \(playlistsongs)")
                         .font(.caption)
                         .foregroundColor(.secondary)

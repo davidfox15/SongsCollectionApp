@@ -22,12 +22,12 @@ final class SongsService: ObservableObject {
         case .top10:
             self.getTop10()
         case .all:
-            self.getAll(sortby: Sortby.name, inverse: false)
+            self.getAll(sortby: Sortby.name, inverse: false, onlyby: Onlyby.all)
         }
     }
     
     func getOne(id: Int) {
-        networkService.baseRequest(url: "http://localhost:8080/api/get/\(id)") { result in
+        networkService.baseRequest(url: "http://130.193.53.242:8080/api/get/\(id)") { result in
             switch result {
             case .success(let songs):
                 self.connect = true
@@ -42,7 +42,7 @@ final class SongsService: ObservableObject {
     }
     
     func getTop10() {
-        networkService.baseRequest(url: "http://localhost:8080/api/get/top10") { result in
+        networkService.baseRequest(url: "http://130.193.53.242:8080/api/get/top10") { result in
             switch result {
             case .success(let songs):
                 self.connect = true
@@ -56,19 +56,29 @@ final class SongsService: ObservableObject {
         }
     }
     
-    func getAll(sortby: Sortby, inverse: Bool) {
+    func getAll(sortby: Sortby, inverse: Bool, onlyby: Onlyby) {
         // Выбор сортировки
-        var urlstr : String = "http://localhost:8080/api/get/all"
+        var urlstr : String = "http://130.193.53.242:8080/api/get/all"
         switch(sortby) {
         case .name:
-                urlstr += "?sortby=name"
+            urlstr += "?sortby=name"
             break
         case .author:
-                urlstr += "?sortby=author"
+            urlstr += "?sortby=author"
             break
         case .views:
-                urlstr += "?sortby=views"
+            urlstr += "?sortby=views"
             break
+        }
+        switch(onlyby) {
+        case .all:
+            urlstr += "&onlyby=all"
+        case .english:
+            urlstr += "&onlyby=author"
+        case .russian:
+            urlstr += "&onlyby=russian"
+        case .christian:
+            urlstr += "&onlyby=christian"
         }
         if(inverse){
             urlstr += "&inverse=true"
@@ -88,23 +98,33 @@ final class SongsService: ObservableObject {
         }
     }
     
-    func search(searchstr: String, searchby: Searchby, sortby: Sortby, inverse: Bool) {
+    func search(searchstr: String, searchby: Searchby, sortby: Sortby, inverse: Bool, onlyby : Onlyby) {
         var urlstr : String
         switch(searchby) {
         case .name:
-                urlstr = "http://localhost:8080/api/get/findname"
+            urlstr = "http://localhost:8080/api/get/findname"
         case .author:
-                urlstr = "http://localhost:8080/api/get/findauthor"
+            urlstr = "http://localhost:8080/api/get/findauthor"
         case .text:
-                urlstr = "http://localhost:8080/api/get/findtext"
+            urlstr = "http://localhost:8080/api/get/findtext"
         }
         switch(sortby) {
         case .name:
-                urlstr += "?sortby=name"
+            urlstr += "?sortby=name"
         case .author:
-                urlstr += "?sortby=author"
+            urlstr += "?sortby=author"
         case .views:
-                urlstr += "?sortby=views"
+            urlstr += "?sortby=views"
+        }
+        switch(onlyby) {
+        case .all:
+            urlstr += "&onlyby=all"
+        case .english:
+            urlstr += "&onlyby=author"
+        case .russian:
+            urlstr += "&onlyby=russian"
+        case .christian:
+            urlstr += "&onlyby=christian"
         }
         if(inverse){
             urlstr += "&inverse=true"
@@ -127,7 +147,7 @@ final class SongsService: ObservableObject {
     }
     
     func isConnect() {
-        networkService.baseRequest(url: "http://localhost:8080/api/check") { result in
+        networkService.baseRequest(url: "http://130.193.53.242:8080/api/check") { result in
             switch result {
             case .success(_):
                 self.connect = true

@@ -49,7 +49,7 @@ struct CatalogView: View {
                                 // add to favorite
                                 song.saveToFavorite(context: viewContext)
                                 // для обновления звездочки
-                                songsViewModel.getAll(sortby: filter.sort, inverse: filter.inverse)
+                                songsViewModel.getAll(sortby: filter.sort, inverse: filter.inverse, onlyby: filter.only)
                             }
                         } label: {
                             //Favorite
@@ -69,12 +69,12 @@ struct CatalogView: View {
                 .listStyle(.plain)
                 .navigationBarHidden(true)
                 .refreshable {
-                    songsViewModel.getAll(sortby: filter.sort, inverse: filter.inverse)
+                    songsViewModel.getAll(sortby: filter.sort, inverse: filter.inverse, onlyby: filter.only)
                 }
                 NavigationBarView(page: $page)
             }
             .sheet(isPresented: $showSheet, onDismiss: {
-                songsViewModel.getAll(sortby: filter.sort, inverse: filter.inverse)
+                songsViewModel.getAll(sortby: filter.sort, inverse: filter.inverse, onlyby: filter.only)
             }) {
                 if let chosesong = self.chosesong {
                     ChosePlaylistSheet(song: chosesong)

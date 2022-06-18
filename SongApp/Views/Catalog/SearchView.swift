@@ -37,9 +37,9 @@ struct SearchView: View {
                         .onSubmit {
                             print("Submit! \(search)")
                             if(search != ""){
-                                songsViewModel.search(searchstr: search, searchby: filter.search, sortby: filter.sort, inverse: filter.inverse)
+                                songsViewModel.search(searchstr: search, searchby: filter.search, sortby: filter.sort, inverse: filter.inverse, onlyby: filter.only)
                             } else {
-                                songsViewModel.getAll(sortby: filter.sort, inverse: filter.inverse)
+                                songsViewModel.getAll(sortby: filter.sort, inverse: filter.inverse, onlyby: filter.only)
                             }
                         }
                     if search != "" {
@@ -75,7 +75,7 @@ struct SearchView: View {
                                 }
                             }.onChange(of: filter.only) { value in
                                 print("change only by to \(value) НЕ РАБОТАЕТ ПОКА")
-                                //songsViewModel.loadSreverData()
+                                songsViewModel.getAll(sortby: filter.sort, inverse: filter.inverse, onlyby: filter.only)
                             }
                         }.padding()
                         HStack{
@@ -87,7 +87,7 @@ struct SearchView: View {
                                 }
                             }.onChange(of: filter.search) { value in
                                 print("change search by to \(value)")
-                                songsViewModel.getAll(sortby: filter.sort, inverse: filter.inverse)
+                                songsViewModel.getAll(sortby: filter.sort, inverse: filter.inverse, onlyby: filter.only)
                             }
                         }.padding()
                         HStack{
@@ -99,14 +99,14 @@ struct SearchView: View {
                                 }
                             }.onChange(of: filter.sort) { value in
                                 print("change sort by to \(value)")
-                                songsViewModel.getAll(sortby: filter.sort, inverse: filter.inverse)
+                                songsViewModel.getAll(sortby: filter.sort, inverse: filter.inverse, onlyby: filter.only)
                             }
                         }.padding()
                         Toggle("Inverse", isOn: $filter.inverse)
                             .padding()
                             .onChange(of: filter.inverse) { value in
                                 print("change inverse by to \(value)")
-                                songsViewModel.getAll(sortby: filter.sort, inverse: filter.inverse)
+                                songsViewModel.getAll(sortby: filter.sort, inverse: filter.inverse, onlyby: filter.only)
                             }
                     }
                 }
