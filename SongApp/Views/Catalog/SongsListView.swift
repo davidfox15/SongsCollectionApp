@@ -50,7 +50,7 @@ struct SongsListView: View {
             .navigationBarTitle(playlist.unwrapName, displayMode: .inline)
         }
         .frame(maxHeight: .infinity ,alignment: .bottom)
-        .ignoresSafeArea(.container, edges: .bottom)
+        .ignoresSafeArea(.all, edges: .bottom)
     }
 }
 

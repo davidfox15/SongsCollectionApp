@@ -15,8 +15,8 @@ struct MainView: View {
     
     var body: some View {
         switch(page) {
-       // case 1:
-            //NewsView(page: $page)
+        case 1:
+            NewsView(page: $page)
         case 2:
             CatalogView(page: $page, songsViewModel: songsViewModelFromServer, filter: filter)
         case 3:

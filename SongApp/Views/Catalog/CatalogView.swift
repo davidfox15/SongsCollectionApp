@@ -71,7 +71,9 @@ struct CatalogView: View {
                 .refreshable {
                     songsViewModel.getAll(sortby: filter.sort, inverse: filter.inverse, onlyby: filter.only)
                 }
+                
                 NavigationBarView(page: $page)
+                    .padding(.bottom, 0)
             }
             .sheet(isPresented: $showSheet, onDismiss: {
                 songsViewModel.getAll(sortby: filter.sort, inverse: filter.inverse, onlyby: filter.only)
@@ -83,7 +85,7 @@ struct CatalogView: View {
                 }
             }
             .frame(maxHeight: .infinity ,alignment: .bottom)
-            .ignoresSafeArea(.container, edges: .bottom)
+            .ignoresSafeArea(.all, edges: .bottom)
         }
         .accentColor(/*@START_MENU_TOKEN@*/Color(red: 0.18823529411764706, green: 0.26666666666666666, blue: 0.3058823529411765)/*@END_MENU_TOKEN@*/)
     }

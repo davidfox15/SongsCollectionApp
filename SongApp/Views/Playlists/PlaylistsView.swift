@@ -82,7 +82,7 @@ struct PlaylistsView: View {
                 NavigationBarView(page: $page)
             }
             .frame(maxHeight: .infinity ,alignment: .bottom)
-            .ignoresSafeArea(.container, edges: .bottom)
+            .ignoresSafeArea(.all, edges: .bottom)
         }
     }
 }
