@@ -12,6 +12,7 @@ struct SongsListView: View {
 //    @FetchRequest(fetchRequest: Song.getAll())private var songs : FetchedResults<Song>
     @ObservedObject var playlist : Playlist
     
+    @State var showSheet : Bool = false
     
     var body: some View {
         VStack {
@@ -33,16 +34,16 @@ struct SongsListView: View {
                         Label("", systemImage: "trash")
                     }
                     .tint(.red)
-                    Button(role: .destructive) {
-                        print("add to playlist")
-                       // showSheet.toggle()
-                    } label: {
-                        Label("", systemImage: "plus.circle")
-                    }
-                    .tint(.blue)
+//                    Button(role: .destructive) {
+//                        print("add to playlist")
+//                        showSheet.toggle()
+//                    } label: {
+//                        Label("", systemImage: "plus.circle")
+//                    }
+//                    .tint(.blue)
                 }
 //                .sheet(isPresented: $showSheet) {
-//                    ChosePlaylistSheet(song: toSong(song: song))
+//                    ChosePlaylistSheet(song: song)
 //                }
             }
             //.listStyle(.plain)

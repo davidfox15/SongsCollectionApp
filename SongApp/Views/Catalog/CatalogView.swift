@@ -22,15 +22,31 @@ struct CatalogView: View {
     
     @State private var chosesong : Song? = nil
     
+    @ObservedObject var model: Model = Model()
+    
     var body: some View {
         NavigationView {
             VStack {
                 // Поисковая строка
                 SearchView(songsViewModel: songsViewModel, filter: filter)
-                if(songsViewModel.connect == false){
-                    Text("could not connect to the server")
-                }
                 
+                switch (songsViewModel.connect) {
+                case .loading:
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle(tint: .yellow))
+//                    RoundedRectangle(cornerRadius: 20)
+//                        .frame(height: 5)
+//                        .foregroundColor(.yellow)
+//                        .padding(.horizontal)
+                case .error:
+                    Text("could not connect to the server")
+                    RoundedRectangle(cornerRadius: 20)
+                        .frame(height: 5)
+                        .foregroundColor(.red)
+                        .padding(.horizontal)
+                case .ok:
+                    Text("")
+                }
                 // Костыль для работы sheet с первого рза (ОРУ) != nil
                 if chosesong != nil {}
                 
@@ -49,7 +65,8 @@ struct CatalogView: View {
                                 // add to favorite
                                 song.saveToFavorite(context: viewContext)
                                 // для обновления звездочки
-                                songsViewModel.getAll(sortby: filter.sort, inverse: filter.inverse, onlyby: filter.only)
+                                //songsViewModel.getAll(sortby: filter.sort, inverse: filter.inverse, onlyby: filter.only)
+                                model.reloadView()
                             }
                         } label: {
                             //Favorite
@@ -88,6 +105,12 @@ struct CatalogView: View {
             .ignoresSafeArea(.all, edges: .bottom)
         }
         .accentColor(/*@START_MENU_TOKEN@*/Color(red: 0.18823529411764706, green: 0.26666666666666666, blue: 0.3058823529411765)/*@END_MENU_TOKEN@*/)
+    }
+}
+
+class Model: ObservableObject {
+    func reloadView() {
+        objectWillChange.send()
     }
 }
 

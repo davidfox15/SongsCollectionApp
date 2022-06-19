@@ -9,7 +9,7 @@ import Foundation
 
 final class SongsService: ObservableObject {
     @Published var songs: [Song] = []
-    @Published var connect: Bool = false
+    @Published var connect: Connect = .loading
     let networkService: NetworkService = NetworkService()
     
     
@@ -27,36 +27,39 @@ final class SongsService: ObservableObject {
     }
     
     func getOne(id: Int) {
+        self.connect = .loading
         networkService.baseRequest(url: "http://130.193.53.242:8080/api/get/\(id)") { result in
             switch result {
             case .success(let songs):
-                self.connect = true
+                self.connect = .ok
                 DispatchQueue.main.async {
                     self.songs = songs
                 }
             case .failure(let error):
-                self.connect = false
+                self.connect = .error
                 print(error.localizedDescription)
             }
         }
     }
     
     func getTop10() {
+        self.connect = .loading
         networkService.baseRequest(url: "http://130.193.53.242:8080/api/get/top10") { result in
             switch result {
             case .success(let songs):
-                self.connect = true
+                self.connect = .ok
                 DispatchQueue.main.async {
                     self.songs = songs
                 }
             case .failure(let error):
-                self.connect = false
+                self.connect = .error
                 print(error.localizedDescription)
             }
         }
     }
     
     func getAll(sortby: Sortby, inverse: Bool, onlyby: Onlyby) {
+        self.connect = .loading
         // Выбор сортировки
         var urlstr : String = "http://130.193.53.242:8080/api/get/all"
         switch(sortby) {
@@ -77,8 +80,8 @@ final class SongsService: ObservableObject {
             urlstr += "&onlyby=author"
         case .russian:
             urlstr += "&onlyby=russian"
-        case .christian:
-            urlstr += "&onlyby=christian"
+//        case .christian:
+//            urlstr += "&onlyby=christian"
         }
         if(inverse){
             urlstr += "&inverse=true"
@@ -87,18 +90,19 @@ final class SongsService: ObservableObject {
         networkService.baseRequest(url: urlstr) { result in
             switch result {
             case .success(let songs):
-                self.connect = true
+                self.connect = .ok
                 DispatchQueue.main.async {
                     self.songs = songs
                 }
             case .failure(let error):
-                self.connect = false
+                self.connect = .error
                 print(error.localizedDescription)
             }
         }
     }
     
     func search(searchstr: String, searchby: Searchby, sortby: Sortby, inverse: Bool, onlyby : Onlyby) {
+        self.connect = .loading
         var urlstr : String
         switch(searchby) {
         case .name:
@@ -123,8 +127,8 @@ final class SongsService: ObservableObject {
             urlstr += "&onlyby=author"
         case .russian:
             urlstr += "&onlyby=russian"
-        case .christian:
-            urlstr += "&onlyby=christian"
+//        case .christian:
+//            urlstr += "&onlyby=christian"
         }
         if(inverse){
             urlstr += "&inverse=true"
@@ -135,26 +139,33 @@ final class SongsService: ObservableObject {
         networkService.baseRequest(url: urlstr) { result in
             switch result {
             case .success(let songs):
-                self.connect = true
+                self.connect = .ok
                 DispatchQueue.main.async {
                     self.songs = songs
                 }
             case .failure(let error):
-                self.connect = false
+                self.connect = .error
                 print(error.localizedDescription)
             }
         }
     }
     
-    func isConnect() {
-        networkService.baseRequest(url: "http://130.193.53.242:8080/api/check") { result in
-            switch result {
-            case .success(_):
-                self.connect = true
-            case .failure(let error):
-                self.connect = false
-                print(error.localizedDescription)
-            }
-        }
-    }
+//    func isConnect() -> Bool {
+//        networkService.baseRequest(url: "http://130.193.53.242:8080/api/check") { result in
+//            switch result {
+//            case .success(_):
+//                self.connect = true
+//            case .failure(let error):
+//                self.connect = false
+//                print(error.localizedDescription)
+//            }
+//        }
+//        return self.connect
+//    }
+}
+
+enum Connect {
+    case loading
+    case error
+    case ok
 }

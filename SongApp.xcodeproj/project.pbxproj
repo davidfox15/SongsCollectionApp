@@ -190,7 +190,6 @@
 		6350A0E3285504E6003E3F93 /* Catalog */ = {
 			isa = PBXGroup;
 			children = (
-				632D6234285017320003C6ED /* SongsListView.swift */,
 				632D622C28500A510003C6ED /* SearchView.swift */,
 				632D622928500A150003C6ED /* CatalogView.swift */,
 				632D623028500B0F0003C6ED /* SongLineView.swift */,
@@ -204,6 +203,7 @@
 			children = (
 				6350A0EB285761D7003E3F93 /* PlaylistsView.swift */,
 				6350A0ED2857621E003E3F93 /* PlaylistLineView.swift */,
+				632D6234285017320003C6ED /* SongsListView.swift */,
 			);
 			path = Playlists;
 			sourceTree = "<group>";

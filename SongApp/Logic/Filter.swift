@@ -91,7 +91,7 @@ enum Sortby : String, CaseIterable, Identifiable {
 enum Onlyby : String, CaseIterable, Identifiable {
     case all
     case russian
-    case christian
+//    case christian
     case english
     var id: Onlyby { self }
 }
