@@ -106,11 +106,11 @@ final class SongsService: ObservableObject {
         var urlstr : String
         switch(searchby) {
         case .name:
-            urlstr = "http://localhost:8080/api/get/findname"
+            urlstr = "http://130.193.53.242:8080/api/get/findname"
         case .author:
-            urlstr = "http://localhost:8080/api/get/findauthor"
+            urlstr = "http://130.193.53.242:8080/api/get/findauthor"
         case .text:
-            urlstr = "http://localhost:8080/api/get/findtext"
+            urlstr = "http://130.193.53.242:8080/api/get/findtext"
         }
         switch(sortby) {
         case .name:
@@ -136,12 +136,14 @@ final class SongsService: ObservableObject {
         urlstr += "&value=\(searchstr)"
         //print(urlstr)
         // Запрос
+        print(urlstr)
         networkService.baseRequest(url: urlstr) { result in
             switch result {
             case .success(let songs):
                 self.connect = .ok
                 DispatchQueue.main.async {
                     self.songs = songs
+                    print("Songs count = \(songs.count)")
                 }
             case .failure(let error):
                 self.connect = .error

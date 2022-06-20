@@ -15,10 +15,6 @@ struct NewsView: View {
     
     var body: some View {
         VStack{
-            
-            TextField("Hello", text: $str)
-            Spacer()
-            NavigationBarView(page: $page)
         }
         .frame(maxHeight: .infinity, alignment: .bottom)
         .ignoresSafeArea(.all, edges: .bottom)
