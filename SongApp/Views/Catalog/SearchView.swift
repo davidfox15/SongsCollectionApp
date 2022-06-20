@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SearchView: View {
-    @State private var search: String = ""
+    @Binding var search: String
     @FocusState private var FieldIsFocused: Bool
     @State var filterIsVisible : Bool = false
     
@@ -37,9 +37,9 @@ struct SearchView: View {
                         .onSubmit {
                             print("Submit! \(search)")
                             if(search != ""){
-                                songsViewModel.search(searchstr: search, searchby: filter.search, sortby: filter.sort, inverse: filter.inverse, onlyby: filter.only)
-                            } else {
-                                songsViewModel.getAll(sortby: filter.sort, inverse: filter.inverse, onlyby: filter.only)
+                                songsViewModel.resetData(searchString: search, searchby: filter.search, sortby: filter.sort, inverse: filter.inverse, onlyby: filter.only)
+//                            } else {
+//                                songsViewModel.getAll(sortby: filter.sort, inverse: filter.inverse, onlyby: filter.only)
                             }
                         }
                     if search != "" {
@@ -75,7 +75,7 @@ struct SearchView: View {
                                 }
                             }.onChange(of: filter.only) { value in
                                 print("change only by to \(value) НЕ РАБОТАЕТ ПОКА")
-                                songsViewModel.getAll(sortby: filter.sort, inverse: filter.inverse, onlyby: filter.only)
+                                songsViewModel.resetData(searchString: search, searchby: filter.search, sortby: filter.sort, inverse: filter.inverse, onlyby: filter.only)
                             }
                         }.padding()
                         HStack{
@@ -87,7 +87,7 @@ struct SearchView: View {
                                 }
                             }.onChange(of: filter.search) { value in
                                 print("change search by to \(value)")
-                                songsViewModel.getAll(sortby: filter.sort, inverse: filter.inverse, onlyby: filter.only)
+                                songsViewModel.resetData(searchString: search, searchby: filter.search, sortby: filter.sort, inverse: filter.inverse, onlyby: filter.only)
                             }
                         }.padding()
                         HStack{
@@ -99,14 +99,14 @@ struct SearchView: View {
                                 }
                             }.onChange(of: filter.sort) { value in
                                 print("change sort by to \(value)")
-                                songsViewModel.getAll(sortby: filter.sort, inverse: filter.inverse, onlyby: filter.only)
+                                songsViewModel.resetData(searchString: search, searchby: filter.search, sortby: filter.sort, inverse: filter.inverse, onlyby: filter.only)
                             }
                         }.padding()
                         Toggle("Inverse", isOn: $filter.inverse)
                             .padding()
                             .onChange(of: filter.inverse) { value in
                                 print("change inverse by to \(value)")
-                                songsViewModel.getAll(sortby: filter.sort, inverse: filter.inverse, onlyby: filter.only)
+                                songsViewModel.resetData(searchString: search, searchby: filter.search, sortby: filter.sort, inverse: filter.inverse, onlyby: filter.only)
                             }
                     }
                 }
@@ -121,8 +121,9 @@ struct SearchView_Previews: PreviewProvider {
     
     @ObservedObject static var songsViewModel : SongsService = SongsService(.all)
     @ObservedObject static var filter: Filter = Filter()
+    @State static var search : String = ""
     
     static var previews: some View {
-        SearchView(songsViewModel: songsViewModel, filter: filter)
+        SearchView(search: $search, songsViewModel: songsViewModel, filter: filter)
     }
 }

@@ -20,6 +20,8 @@ struct CatalogView: View {
     
     @State var showSheet : Bool = false
     
+    @State var search : String = ""
+    
     @State private var chosesong : Song? = nil
     
     @ObservedObject var model: Model = Model()
@@ -28,7 +30,7 @@ struct CatalogView: View {
         NavigationView {
             VStack {
                 // Поисковая строка
-                SearchView(songsViewModel: songsViewModel, filter: filter)
+                SearchView(search: $search, songsViewModel: songsViewModel, filter: filter)
                 
                 switch (songsViewModel.connect) {
                 case .loading:
@@ -51,11 +53,16 @@ struct CatalogView: View {
                 if chosesong != nil {}
                 
                 // Список песен
-                List(songsViewModel.songs, id: \.self.id) { song in
+                List(0..<songsViewModel.songs.count, id: \.self) { i in
+                    let song : Song = songsViewModel.songs[i]
                     // Переход на страницу с песней
                     NavigationLink(destination: SongView(song: song,text: song.gettext())) {
                         // Строка с песней
-                        SongLineView(song:  song)
+                        if i == songsViewModel.songs.count - 1 {
+                            SongLineView(songsViewModel: songsViewModel, filter: filter, search: search, song: song, isLast: true)
+                        } else {
+                            SongLineView(songsViewModel: songsViewModel, filter: filter, search: search, song: song, isLast: false)
+                        }
                     }
                     .swipeActions {
                         Button(role: .destructive) {
@@ -86,14 +93,14 @@ struct CatalogView: View {
                 .listStyle(.plain)
                 .navigationBarHidden(true)
                 .refreshable {
-                    songsViewModel.getAll(sortby: filter.sort, inverse: filter.inverse, onlyby: filter.only)
+                    songsViewModel.resetData(searchString: search, searchby: filter.search, sortby: filter.sort, inverse: filter.inverse, onlyby: filter.only)
                 }
                 
                 NavigationBarView(page: $page)
                     .padding(.bottom, 0)
             }
             .sheet(isPresented: $showSheet, onDismiss: {
-                songsViewModel.getAll(sortby: filter.sort, inverse: filter.inverse, onlyby: filter.only)
+                //songsViewModel.resetData(searchString: search, searchby: filter.search, sortby: filter.sort, inverse: filter.inverse, onlyby: filter.only)
             }) {
                 if let chosesong = self.chosesong {
                     ChosePlaylistSheet(song: chosesong)

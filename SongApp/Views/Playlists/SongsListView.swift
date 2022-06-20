@@ -21,7 +21,7 @@ struct SongsListView: View {
                 // Переход на страницу с песней
                 NavigationLink(destination: SongView(song: song,text: song.gettext())) {
                     // Строка с песней
-                    SongLineView(song: song)
+                    SaveSongLineView(song: song)
                 }
                 .swipeActions {
                     Button(role: .destructive) {

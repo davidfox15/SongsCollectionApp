@@ -26,6 +26,7 @@
 		632D6235285017320003C6ED /* SongsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632D6234285017320003C6ED /* SongsListView.swift */; };
 		6331343E285AFB9C00DDE6C3 /* Tonality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6331343D285AFB9C00DDE6C3 /* Tonality.swift */; };
 		63313441285AFC1900DDE6C3 /* SongBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63313440285AFC1900DDE6C3 /* SongBarView.swift */; };
+		6346653C2860E6B10018E005 /* SaveSongLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6346653B2860E6B10018E005 /* SaveSongLineView.swift */; };
 		6350A0E62856147D003E3F93 /* CDSong+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6350A0E42856147D003E3F93 /* CDSong+CoreDataClass.swift */; };
 		6350A0E72856147D003E3F93 /* CDSong+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6350A0E52856147D003E3F93 /* CDSong+CoreDataProperties.swift */; };
 		6350A0E928561A65003E3F93 /* SP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6350A0E828561A65003E3F93 /* SP.swift */; };
@@ -57,6 +58,7 @@
 		632D6234285017320003C6ED /* SongsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongsListView.swift; sourceTree = "<group>"; };
 		6331343D285AFB9C00DDE6C3 /* Tonality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tonality.swift; sourceTree = "<group>"; };
 		63313440285AFC1900DDE6C3 /* SongBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongBarView.swift; sourceTree = "<group>"; };
+		6346653B2860E6B10018E005 /* SaveSongLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveSongLineView.swift; sourceTree = "<group>"; };
 		6350A0E42856147D003E3F93 /* CDSong+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDSong+CoreDataClass.swift"; sourceTree = "<group>"; };
 		6350A0E52856147D003E3F93 /* CDSong+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDSong+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		6350A0E828561A65003E3F93 /* SP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SP.swift; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 				6350A0EB285761D7003E3F93 /* PlaylistsView.swift */,
 				6350A0ED2857621E003E3F93 /* PlaylistLineView.swift */,
 				632D6234285017320003C6ED /* SongsListView.swift */,
+				6346653B2860E6B10018E005 /* SaveSongLineView.swift */,
 			);
 			path = Playlists;
 			sourceTree = "<group>";
@@ -300,6 +303,7 @@
 				632D623128500B0F0003C6ED /* SongLineView.swift in Sources */,
 				632D6203285000B20003C6ED /* SongApp.xcdatamodeld in Sources */,
 				6350A0EC285761D7003E3F93 /* PlaylistsView.swift in Sources */,
+				6346653C2860E6B10018E005 /* SaveSongLineView.swift in Sources */,
 				632D621F2850044A0003C6ED /* NetworkService.swift in Sources */,
 				632D6200285000B20003C6ED /* Persistence.swift in Sources */,
 				632D622D28500A510003C6ED /* SearchView.swift in Sources */,
